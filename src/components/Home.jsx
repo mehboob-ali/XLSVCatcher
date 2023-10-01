@@ -1,13 +1,13 @@
 import { Box, Container, CssBaseline, AppBar, Typography } from '@mui/material';
 import  { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import {  useDispatch } from 'react-redux';
 import { storeUploadedFile } from '../redux/slices/fileUploadSlice';
 import NestedModal from './DataPreview';
 import XLSX from 'xlsx'
 function Home() {
     console.log("START")
     const dispatch = useDispatch();
-    const jsonData2= useSelector((state)=>state.fileUpload.file);
+    // const jsonData2= useSelector((state)=>state.fileUpload.file);
 
     const [hasError, setHasError] = useState(false);
     const [jsonData, setJsonData]= useState(null)
