@@ -60,7 +60,7 @@ function NestedModal() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {jsonData.slice().map((row, rowIndex) => (
+            {jsonData.slice(1).map((row, rowIndex) => (
               <TableRow key={rowIndex}>
                 {row.map((cell, cellIndex) => (
                   <TableCell key={cellIndex}>{cell}</TableCell>
