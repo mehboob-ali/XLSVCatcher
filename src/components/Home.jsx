@@ -1,4 +1,4 @@
-import { Box, TextField, Container, CssBaseline, AppBar, Typography } from '@mui/material';
+import { Box, Container, CssBaseline, AppBar, Typography } from '@mui/material';
 import  { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { storeUploadedFile } from '../redux/slices/fileUploadSlice';
@@ -44,10 +44,10 @@ function Home() {
             }
         }
     }
-    const handlePreview=()=>{
-        // console.log("file type is:",file);
+    // const handlePreview=()=>{
+    //     // console.log("file type is:",file);
 
-    }
+    // }
     return (
         <Container maxWidth='lg'>
             <AppBar position='static'>

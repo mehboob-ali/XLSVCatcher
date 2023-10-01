@@ -1,5 +1,5 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-   Box, Button, Typography, Modal } from '@mui/material';
+   Box, Button, Modal } from '@mui/material';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
