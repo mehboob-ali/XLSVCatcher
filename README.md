@@ -13,21 +13,18 @@ Clone this repository to your local machine:
    #### npm install
    
 ## How to use
-### `npm start`
 
+### `npm start`
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-You will see this page
-
-## File Upload:
+## File Upload: 
 To upload a file click on "Choose File" button to choose a file.
 
 Note that this application only allows excel files(.xlsx,.xls) and csv. If you try to upload a different file a pop-up box will show and it will reset the "input file" field.
 
 ## Data Preview:
 To preview the uploaded data click on 'PREVIEW DATA' button.
-
 A Modal will open which will show the uploaded data in a clean, readable table.
 Click on close button to close the modal. 
 
