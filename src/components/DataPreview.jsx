@@ -1,7 +1,8 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-   Box, Button, Modal } from '@mui/material';
-import React from 'react';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Box, Button, Modal } from '@mui/material';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'; import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import ConfirmSubmitDialog from './ConfirmSubmitDialog';
+
 
 const style = {
   position: 'absolute',
@@ -12,80 +13,87 @@ const style = {
   height: '100%',
   bgcolor: 'background.paper',
   border: '2px solid #000',
+  borderRadius: 5,
   boxShadow: 24,
   p: 4,
   px: 8
 };
 
 function NestedModal() {
-  const jsonData= useSelector((state)=>state.fileUpload.file);
+  const jsonData = useSelector((state) => state.fileUpload.file);
 
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [openConfirmDialog, setOpenConfirmDialog] = useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const handleOpenconfirmDialog = () => {
+    setOpenConfirmDialog(true);
+  }
+
   if (!jsonData) {
-    return null; // Handle case when jsonData is empty
+    return <div><Button disabled sx={{ marginTop: 2 }} color='primary' variant='contained'>Preview</Button></div>
   }
 
   const columnHeaders = jsonData[0]; // Extract the first row as column headers
 
   return (
     <div>
-      <Button onClick={handleOpen}>Preview</Button>
+      <Button sx={{ marginTop: 2 }} color='primary' variant='contained' onClick={handleOpen}>Preview</Button>
 
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
-        sx={{position:'absolute',
-        top:'10%',
-        left:'10%',
-        overflow:'scroll',
-        height:'auto',
-        display:'block'}}
+        sx={{
+          position: 'absolute',
+          m: 2,
+          height: 'auto',
+          display: 'block'
+        }}
       >
 
-      <Box sx={style}>
-      <h2>Data Preview</h2>
-      <TableContainer component={Paper} sx={{top :'10%', height: '80%'}}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              {columnHeaders.map((header, index) => (
-                <TableCell sx={{fontWeight: 'bold'}} key={index}>{header}</TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {jsonData.slice(1).map((row, rowIndex) => (
-              <TableRow key={rowIndex}>
-                {row.map((cell, cellIndex) => (
-                  <TableCell key={cellIndex}>{cell}</TableCell>
+        <Box sx={{ ...style, width: '100%' }}>
+          <Button sx={{ position: 'absolute', right: 0, top: 0 }} onClick={handleClose}>
+            <CloseOutlinedIcon fontSize='large' color='error' />
+          </Button>
+          <h3>Data Preview</h3>
+          <TableContainer component={Paper} sx={{ height: '80%', width: '100%' }}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead sx={{ bgcolor: 'lightgrey' }}>
+                <TableRow>
+                  {columnHeaders.map((header, index) => (
+                    <TableCell sx={{ fontWeight: 'bold' }} key={index}>{header}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {jsonData.slice(1).map((row, rowIndex) => (
+                  <TableRow key={rowIndex}>
+                    {row.map((cell, cellIndex) => (
+                      <TableCell key={cellIndex}>{cell}</TableCell>
+                    ))}
+                  </TableRow>
                 ))}
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-     <div style={{marginTop: '3%', gap:'5%', display: 'grid', gridTemplateColumns: 'auto auto auto' }}>
-     
-      <Button variant='contained' onClick={()=>alert('Data Saved Succesfully!!!')}>Submit  
-        </Button>
+              </TableBody>
+            </Table>
+          </TableContainer>
 
-        <Button variant='contained' color='error'
-        onClick={handleClose}>
-          Cancel  
-        </Button>
-        </div>
+          <div style={{ marginTop: '2%', display: ' flex', justifyContent: 'center', alignItems: 'center' }}>
+
+            <Button variant='contained' sx={{ width: '30%' }} onClick={handleOpenconfirmDialog}>Submit
+            </Button>
+            {openConfirmDialog === true ?
+              <ConfirmSubmitDialog openConfirmDialog={openConfirmDialog} setOpenConfirmDialog={setOpenConfirmDialog} /> :
+              <></>}
+
+          </div>
         </Box>
-        </Modal>
+      </Modal>
 
-
-
-      
     </div>
   );
 }
