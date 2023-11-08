@@ -8,9 +8,9 @@ Live Project Link : [https://mehboob-ali-xlsvcatcher.netlify.app/]
 
 Clone this repository to your local machine:
 1. To clone this repo, run this command in your VS Code terminal:
-   #### git clone https://github.com/mehboob-ali/zikrabyte-task
+   #### git clone https://github.com/mehboob-ali/XLSVCatcher
 2. Navigate to the project repository:
-   #### cd zikrabyte-task
+   #### cd XLSVCatcher
 3. Installproject dependencies:
    #### npm install
    
